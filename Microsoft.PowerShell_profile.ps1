@@ -120,7 +120,7 @@ function Uptime {
 }
 
 function Sync {
-    & "$PROFILE | Split-Path\sync.ps1"
+    & "$PROFILE | Split-Path\..\sync.ps1"
 }
 
 function Reload {
