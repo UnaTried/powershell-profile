@@ -108,10 +108,10 @@ function ff($name) {
 }
 
 # Network Utilities
-function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
+function PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
 
 # System Utilities
-function uptime {
+function Uptime {
     if ($PSVersionTable.PSVersion.Major -eq 5) {
         Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
     } else {
@@ -119,7 +119,7 @@ function uptime {
     }
 }
 
-function Sync-Profile {
+function Sync {
     & "$PROFILE | Split-Path\sync.ps1"
 }
 
