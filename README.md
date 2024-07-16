@@ -4,10 +4,10 @@ A stylish and functional PowerShell profile that looks and feels almost as good 
 
 ## ⚡ One line install (Administrator PowerShell needed) (RECOMMENDED)
 
-	Step one:
-		Open PowerShell
+	Step two:
+		Open PowerShell 7
 
-  	Step two:
+  	Step one:
    		Execute the command:
 		
 			irm "https://github.com/F5T3/powershell-profile/raw/main/setup.ps1" | iex	
@@ -19,9 +19,12 @@ Then restart PowerShell
 
 	# Prerequisites
 		• Git
-		• A terminal (PowerShell recommended)
+		• A terminal (PowerShell is recommended)
 	# Installation
- 		Step one install Git:
+		Step one: Install PowerShell 7
+  			
+ 		
+ 		Step two: Install Git
    			Downlaod Git from their website:
 				https://git-scm.com/download
 			Select your OS if its MacOS, Windows or Linux and hit download or execute the command needed to install Git
