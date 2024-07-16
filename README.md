@@ -9,9 +9,9 @@ A stylish and functional PowerShell profile that looks and feels almost as good 
 
   	Step two:
    		Execute the command:
-		```
+		
 			irm "https://github.com/F5T3/powershell-profile/raw/main/setup.ps1" | iex	
-		```
+		
 
 Then restart PowerShell
 
