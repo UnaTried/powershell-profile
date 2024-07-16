@@ -9,4 +9,4 @@ git add .
 
 git commit -m $commitMessage
 
-git push -all
+git push --all
