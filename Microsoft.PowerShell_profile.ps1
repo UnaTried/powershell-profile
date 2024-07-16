@@ -97,7 +97,7 @@ $EDITOR = if (Test-CommandExists nvim) { 'nvim' }
           else { 'notepad' }
 Set-Alias -Name nvim -Value $EDITOR
 
-function Edit-Profile {
+function Edit {
     nvim $PROFILE.CurrentUserAllHosts
 }
 function touch($file) { "" | Out-File $file -Encoding ASCII }
