@@ -28,7 +28,7 @@ Then restart PowerShell
    			Downlaod Git from their website:
 				https://git-scm.com/download
 			Select your OS if its MacOS, Windows or Linux and hit download or execute the command needed to install Git
-   			Disclaimer: You need Homebrew or MacPort to install it on MacOS
+   			##Disclaimer! You need Homebrew or MacPort to install it on MacOS
  			
 
 ## 🛠️ Fix the Missing Font
