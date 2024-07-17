@@ -36,7 +36,9 @@ Then restart PowerShell
         if you have OneDrive installed and set it to backup your Documents, Desktop, Photos and Music Folder to the OneDrive cloud (This might not work because I haven't tested this yet)
             cd %userprofile%\OneDrive\Documents
         then execute this command to copy the profile and automatically set it up
-        	git clone git@github.com:F5T3/powershell-profile.git
+        	git clone git@github.com:F5T3/powershell-profile.git PowerShell
+
+   		After that you are done and need restart your PowerShell.
 ## 🛠️ Fix the Missing Font
 
 	After running the script, you'll find a downloaded `cove.zip` file in the folder you executed the script from. Follow these steps to install the required nerd fonts:
