@@ -11,7 +11,7 @@ Please read the entire Documentation before installing
   	Step one:
    		Execute the command:
 			irm "https://github.com/F5T3/powershell-profile/raw/main/setup.ps1" | iex	
-Then restart PowerShell
+	At last restart PowerShell
 
 ## Git install
 
