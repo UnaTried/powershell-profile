@@ -23,10 +23,10 @@ Please read the entire Documentation before installing
   			
  		
  		Step two: Install Git
-   			Downlaod Git from their website:
+   		 	• Downlaod Git from their website:
 				https://git-scm.com/download
-			Select your OS if its MacOS, Windows or Linux and hit download or execute the command needed to install Git.
-   			#isclaimer! You need Homebrew or MacPort to install it on MacOS.
+			•Select your OS if its MacOS, Windows or Linux and hit download or execute the command needed to install Git.
+   			#Disclaimer! You need Homebrew or MacPort to install it on MacOS.
 
         Step three: clone the PowerShell profile
         Open up PowerShell 7 by either searching it up using windows search, using the start menu or typing this command in the run dialog:
