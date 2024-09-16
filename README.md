@@ -41,7 +41,7 @@ Please read the entire Documentation before installing
         	git clone git@github.com:F5T3/powershell-profile PowerShell
         if that doesn't work doesn'
             git clone https://github.com/F5T3/powershell-profile PowerShell
-   		After that you are done and need restart your PowerShell.
+   	After that you are done and need restart your PowerShell.
 #### 🛠️ Fix the Missing Font
 
 	After running the script, you'll find a downloaded `cove.zip` file in the folder you executed the script from. Follow these steps to install the required nerd fonts:
