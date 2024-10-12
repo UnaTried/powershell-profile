@@ -1,11 +1,31 @@
 ### PowerShell Profile Refactor
 ### Version 1.03 - Refactored
 
-# Initial GitHub.com connectivity check with 1 second timeout
+#################################################################################################################################
+############                                                                                                         ############
+############                                          !!!   WARNING:   !!!                                           ############
+############                                                                                                         ############
+############                DO NOT MODIFY THIS FILE. THIS FILE IS HASHED AND UPDATED AUTOMATICALLY.                  ############
+############                    ANY CHANGES MADE TO THIS FILE WILL BE OVERWRITTEN BY COMMITS TO                      ############
+############                       https://github.com/ChrisTitusTech/powershell-profile.git.                         ############
+############                                                                                                         ############
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+############                                                                                                         ############
+############                      IF YOU WANT TO MAKE CHANGES, USE THE Edit-Profile FUNCTION                         ############
+############                              AND SAVE YOUR CHANGES IN THE FILE CREATED.                                 ############
+############                                                                                                         ############
+#################################################################################################################################
+
+# Opts out of telemetry before doing anything. This only happends when PowerShell is run as administrator!
+if ([bool]([System.Security.Principal.WindowsIdentity]::GetCurrent()).IsSystem) {
+    [System.Environment]::SetEnvironmentVariable('POWERSHELL_TELEMETRY_OPTOUT', 'true', [System.EnvironmentVariableTarget]::Machine)
+}
+
+# Checks if there is a connection to GitHub (https://github.com) 5 second timeout
 $canConnectToGitHub = Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 5
 
-# Import Modules and External Profiles
-# Ensure Terminal-Icons module is installed before importing
+# Import modules and external profiles
+# Ensure the Terminal-Icons module is installed before importing it
 if (-not (Get-Module -ListAvailable -Name Terminal-Icons)) {
     Install-Module -Name Terminal-Icons -Scope CurrentUser -Force -SkipPublisherCheck
 }
@@ -15,22 +35,21 @@ if (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
 }
 
-# Check for Profile Updates
+# Check for profile updates
 function Update-Profile {
     if (-not $global:canConnectToGitHub) {
-        Write-Host "Skipping profile update check due to GitHub.com not responding within 5 second." -ForegroundColor Yellow
+        Write-Host "Skipping profile update since there was no connection to GitHub (https://github.com)." -ForegroundColor Yellow
         return
     }
 
     try {
-        Write-Host "Checking for profile updates..." -ForegroundColor Cyan
         $url = "https://raw.githubusercontent.com/F5T3/powershell-profile/main/Microsoft.PowerShell_profile.ps1"
         $oldhash = Get-FileHash $PROFILE
         Invoke-RestMethod $url -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
         $newhash = Get-FileHash "$env:temp/Microsoft.PowerShell_profile.ps1"
         if ($newhash.Hash -ne $oldhash.Hash) {
             Copy-Item -Path "$env:temp/Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
-            Write-Host "Profile has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
+            Write-Host "The PowerShell profile has been updated. Please restart PowerShell for the updates to be in your PowerShell" -ForegroundColor Magenta
         }
     } catch {
         Write-Error "Unable to check for `$profile updates"
@@ -40,9 +59,10 @@ function Update-Profile {
 }
 Update-Profile
 
+#Check for PowerShell updates
 function Update-PowerShell {
     if (-not $global:canConnectToGitHub) {
-        Write-Host "Skipping PowerShell update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
+        Write-Host "Skipping profile update since there was no connection to GitHub (https://github.com)." -ForegroundColor Yellow
         return
     }
 
@@ -70,6 +90,18 @@ function Update-PowerShell {
 }
 Update-PowerShell
 
+function Fix-ModuleRepos {
+    Get-ChildItem -Path $env:PSModulePath.Split(';') -Filter 'PackageManagement' -Directory -ErrorAction SilentlyContinue |
+    Get-ChildItem -Directory |
+    Where-Object -Property Name -Match '\d*\.\d*\.\d*' |
+    Get-ChildItem -Filter 'netstandard2.0' -Directory |
+    ForEach-Object -Process {
+        foreach ($clr in 'fullclr', 'coreclr') {
+            Copy-Item -Path $_.FullName -Destination "$($_.Parent)\$clr" -Recurse -ErrorAction SilentlyContinue
+        }
+    }
+}
+Fix-ModuleRepos
 
 # Admin Check and Prompt Customization
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
@@ -88,15 +120,25 @@ function Test-CommandExists {
 
 # Editor Configuration
 $EDITOR = if (Test-CommandExists nvim) { 'nvim' }
-          elseif (Test-CommandExists pvim) { 'pvim' }
-          elseif (Test-CommandExists vim) { 'vim' }
-          elseif (Test-CommandExists vi) { 'vi' }
-          elseif (Test-CommandExists code) { 'code' }
-          elseif (Test-CommandExists sublime_text) { 'notepads' }
-          elseif (Test-CommandExists notepad++) { 'notepad++' }
-          elseif (Test-CommandExists sublime_text) { 'sublime_text' }
-          else { 'notepad' }
+        elseif (Test-CommandExists pvim) { 'pvim' }
+        elseif (Test-CommandExists vim) { 'vim' }
+        elseif (Test-CommandExists vi) { 'vi' }
+        elseif (Test-CommandExists cursor) { 'cursor' }          
+        elseif (Test-CommandExists sublime_text) {'sublime_text' }
+        elseif (Test-CommandExists code) { 'code' }
+        elseif (Test-CommandExists notepad++) { 'notepad++' }
+        elseif (Test-CommandExists notepads) { 'notepads' }
+        else {'notepad'}
 Set-Alias -Name nvim -Value $EDITOR
+Set-Alias -Name pvim -Value $EDITOR
+Set-Alias -Name vim -Value $EDITOR
+Set-Alias -Name vi -Value $EDITOR
+Set-Alias -Name cursor -Value $EDITOR
+Set-Alias -Name sublime_text -Value $EDITOR
+Set-Alias -Name code -Value $EDITOR
+Set-Alias -Name notepad++ -Value $EDITOR
+Set-Alias -Name notepads -Value $EDITOR
+Set-Alias -Name notepad -Value $EDITOR
 
 function Edit {
     nvim $PROFILE.CurrentUserAllHosts
