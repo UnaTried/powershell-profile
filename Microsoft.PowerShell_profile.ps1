@@ -43,13 +43,14 @@ function Update-Profile {
     }
 
     try {
+        Write-Host "Checking for Profile updates..." -ForegroundColor Cyan
         $url = "https://raw.githubusercontent.com/F5T3/powershell-profile/main/Microsoft.PowerShell_profile.ps1"
         $oldhash = Get-FileHash $PROFILE
         Invoke-RestMethod $url -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
         $newhash = Get-FileHash "$env:temp/Microsoft.PowerShell_profile.ps1"
         if ($newhash.Hash -ne $oldhash.Hash) {
             Copy-Item -Path "$env:temp/Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
-            Write-Host "The PowerShell profile has been updated. Please restart PowerShell for the updates to be in your PowerShell" -ForegroundColor Magenta
+            Write-Host "The PowerShell profile has been updated. Please restart PowerShell for the changes to be reflected" -ForegroundColor Magenta
         }
     } catch {
         Write-Error "Unable to check for `$profile updates"
@@ -80,7 +81,7 @@ function Update-PowerShell {
         if ($updateNeeded) {
             Write-Host "Updating PowerShell..." -ForegroundColor Yellow
             winget upgrade "Microsoft.PowerShell" --accept-source-agreements --accept-package-agreements
-            Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
+            Write-Host "PowerShell has been updated. Please restart PowerShell for the changes to be reflected" -ForegroundColor Magenta
         } else {
             Write-Host "Your PowerShell is up to date." -ForegroundColor Green
         }
