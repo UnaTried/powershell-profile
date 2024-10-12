@@ -9,6 +9,6 @@ git pull
 
 git add .
 
-git commit -m $commitMessage -a
+git commit -m $commitMessage
 
 git push --all
