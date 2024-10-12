@@ -23,6 +23,7 @@ function Update-Profile {
     }
 
     try {
+        Write-Host "Checking for profile updates..." -ForegroundColor Cyan
         $url = "https://raw.githubusercontent.com/F5T3/powershell-profile/main/Microsoft.PowerShell_profile.ps1"
         $oldhash = Get-FileHash $PROFILE
         Invoke-RestMethod $url -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
