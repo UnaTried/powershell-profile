@@ -5,10 +5,10 @@ param (
 $profileDir = Split-Path -Path $PROFILE
 Set-Location -Path $profileDir
 
-git pull
+#git pull
 
-git add .
+#git add .
 
-git commit -m $commitMessage
+git commit -m $commitMessage -a
 
 git push --all
