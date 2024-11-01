@@ -14,7 +14,7 @@ function Test-InternetConnection {
         return $true
     }
     catch {
-        Write-Warning "Internet connection is required but not available. Please check your connection."
+        Write-Warning "Internet connection is required but not available. Please check your connection." -Test
         return $false
     }
 }
