@@ -5,7 +5,7 @@ if ($Env:OS -eq "Windows_NT") {
         break
     }
 } else {
-    Write-Host "Executing in MacOS or Linux mode"
+    Write-Host "Executing in MacOS or Linux mode" -ForegroundColor Green
 }
 # Function to test internet connectivity
 function Test-InternetConnection {
