@@ -4,6 +4,8 @@ if ($Env:OS -eq "Windows_NT") {
         Write-Warning "Please run this script as an Administrator!"
         break
     }
+} else {
+    Write-Host "Executing in MacOS or Linux mode"
 }
 # Function to test internet connectivity
 function Test-InternetConnection {
