@@ -30,10 +30,10 @@ if (!(Test-Path -Path $PROFILE -PathType Leaf)) {
         # Detect Version of PowerShell & Create Profile directories if they do not exist.
         $profilePath = ""
         if ($PSVersionTable.PSEdition -eq "Core") { 
-            $profilePath = "$env:userprofile\Documents\Powershell"
+            $profilePath = "$env:PROFILE"
         }
         elseif ($PSVersionTable.PSEdition -eq "Desktop") {
-            $profilePath = "$env:userprofile\Documents\WindowsPowerShell"
+            $profilePath = "$env:PROFILE"
         }
 
         if (!(Test-Path -Path $profilePath)) {
@@ -53,7 +53,7 @@ else {
         Get-Item -Path $PROFILE | Move-Item -Destination "oldprofile.ps1" -Force
         Invoke-RestMethod https://github.com/F5T3/powershell-profile/raw/main/Microsoft.PowerShell_profile.ps1 -OutFile $PROFILE
         Write-Host "The profile @ [$PROFILE] and has replace the old profile." -ForegroundColor Green
-        Write-Host "Please back up any persistent components of your old profile to [$HOME\Documents\PowerShell\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes" -ForegroundColor Yellow  
+        Write-Host "Please back up any persistent components of your old profile to [$PROFILE\..\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes" -ForegroundColor Yellow  
     }
     catch {
         Write-Error "Failed to backup and update the profile. Error: $_" -ForegroundColor Red
