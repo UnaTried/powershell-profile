@@ -11,8 +11,8 @@ Step two:
     Open PowerShell 7
     
 Step one:
-    Execute the command:
-        ```irm "https://github.com/F5T3/powershell-profile/raw/main/setup.ps1" | iex```
+    Execute the command: \
+        ```irm "https://github.com/F5T3/powershell-profile/raw/main/setup.ps1" | iex``` \
     At last restart PowerShell
 
 ### Git install
