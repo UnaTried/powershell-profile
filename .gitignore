@@ -1,4 +1,4 @@
-
+# HandBrakeCLI -i /dev/sr0 --main-feature -o TheBadGuysDe.mp4 -f mp4 -E copy -q 20 --audio-lang-list deu; HandBrakeCLI -i /dev/sr0 --main-feature -o file.mp4 -f mp4 -E copy -q 20
 *.zip
 *.ttf
 oldprofile.ps1
