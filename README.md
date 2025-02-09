@@ -18,8 +18,8 @@ Step one:
 ### Git install
 
 #### Prerequisites
-    • Git
-    • A terminal (PowerShell is recommended)
+- Git
+- A terminal (PowerShell is recommended)
 ##### Installation
     Step one: Install PowerShell 7 			
 	
